@@ -35,15 +35,15 @@ function App() {
             <div className='result-input-fields'>
               <div className='input-field'>
                 <label>Custo risco sacado:</label>
-                <input className='result-input' placeholder='$' type='text' />
+                <input className='result-input' placeholder='$' type='text' disabled />
               </div>
               <div className='input-field'>
                 <label>Valor para 70 dias:</label>
-                <input className='result-input' placeholder='$' type='text' />
+                <input className='result-input' placeholder='$' type='text' disabled />
               </div>
               <div className='input-field'>
                 <label>Desconto real:</label>
-                <input className='result-input' placeholder='$' type='text' />
+                <input className='result-input' placeholder='$' type='text' disabled />
               </div>
             </div>
           </div>
