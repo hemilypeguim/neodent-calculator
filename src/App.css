@@ -183,9 +183,9 @@ label {
 }
 
 .underline {
-    width: 40%;
+    width: 100%;
     height: 1px;
-    background-color: #695469;
+    background-color: #481852;
 }
 
 .result-input-fields {
