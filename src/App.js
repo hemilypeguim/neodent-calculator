@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { Info } from 'phosphor-react';
 import { Tooltip } from 'react-tooltip'
+import { NumericFormat } from 'react-number-format';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
   const t4 = Math.pow(1 + t6, 1 / 30) - 1; // verificar calculado do cleison
 
   const [valorInicial, setValorInicial] = useState(0);
-  const [prazoInicial, setPrazoInicial] = useState(0);
+  const [prazoInicial, setPrazoInicial] = useState('X');
 
   const [custoRiscoSacado, setCustoRiscoSacado] = useState('');
   const [rendimentoEm70Dias, setRendimentoEm70Dias] = useState('');
@@ -26,6 +27,10 @@ function App() {
 
   function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+  }
+
+  function unformatCurrency(value) {
+    return Number(value.replace(/[^0-9,-]+/g,"").replace(",","."));
   }
 
   function calcular() {
@@ -55,7 +60,20 @@ function App() {
           <div className='input-field'>
             <label>Valor inicial:</label>
             <div className='input-container'>
-              <input className='calc-input' placeholder='Digite aqui' type='number' onChange={(event) => { setValorInicial(Number(event.target.value)) }} />
+            <NumericFormat
+                className='calc-input'
+                placeholder='Digite aqui'
+                thousandSeparator="."
+                decimalSeparator=','
+                prefix={'R$ '}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                allowNegative={false}
+                onValueChange={(values) => {
+                  const { formattedValue, value } = values;
+                  setValorInicial(unformatCurrency(formattedValue));
+                }}
+              />
               <Info className='input-icon' size={19} data-tooltip-id="valor-inicial" />
               <Tooltip
                 id='valor-inicial'
@@ -68,7 +86,7 @@ function App() {
           <div className='input-field'>
             <label>Prazo de pagamento inicial:</label>
             <div className='input-container'>
-              <input className='calc-input' placeholder='Digite aqui' type='number' onChange={(event) => { setPrazoInicial(Number(event.target.value)) }} />
+              <input className='calc-input' placeholder='Digite aqui' type='number' onChange={(event) => { setPrazoInicial(Number(event.target.value)); if(event.target.value == '') setPrazoInicial('X') }} />
               <Info className='input-icon' size={19} data-tooltip-id="prazo-inicial" />
               <Tooltip
                 id='prazo-inicial'
@@ -86,7 +104,7 @@ function App() {
             <div className='underline'></div>
             <div className='result-input-fields'>
               <div className='input-field'>
-                <label>Valor que irá receber no dia {prazoInicial != 0 ? prazoInicial : 'X'} via risco sacado:</label>
+                <label>Valor que irá receber no dia {prazoInicial} via risco sacado:</label>
                 <div className='result-input-container'>
                   <input className='result-input' placeholder='$' type='text' disabled value={custoRiscoSacado} />
                   <Info className='input-icon' size={19} data-tooltip-id="custoRiscoSacado" />
@@ -99,7 +117,7 @@ function App() {
                 </div>
               </div>
               <div className='input-field'>
-                <label>Rendimento fornecedor do dia {prazoInicial != 0 ? prazoInicial : 'X'} ao dia 70:</label>
+                <label>Rendimento fornecedor do dia {prazoInicial} ao dia 70:</label>
                 <div className='more-label-container'>
                   <div className='result-input-container'>
                     <input className='result-input' placeholder='$' type='text' disabled value={rendimentoEm70Dias} />
@@ -108,7 +126,7 @@ function App() {
                       id='rendimentoEm70Dias'
                       place='right'
                       className='tooltip-zindex'
-                      content={`Esse é o valor que o dinheiro rende aplicado no CDI do dia ${prazoInicial != 0 ? prazoInicial : 'X'} ao dia 70.`}
+                      content={`Esse é o valor que o dinheiro rende aplicado no CDI do dia ${prazoInicial} ao dia 70.`}
                     />
                   </div>
                 </div>
