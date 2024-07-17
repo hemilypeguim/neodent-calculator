@@ -1,6 +1,9 @@
 .container {
     width: 100vw;
     height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
     background: linear-gradient(to right, #7A1B79, #1F0C22);
     display: flex;
     align-items: center;
@@ -220,5 +223,9 @@ label {
 
     .more-label-container p {
         font-size: 12px;
+    }
+
+    .result-fields {
+        transform: scale(0.90);
     }
 }
