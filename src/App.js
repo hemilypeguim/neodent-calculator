@@ -100,7 +100,7 @@ function App() {
         </div>
         <div className='result-fields'>
           <div className='result-name'>
-            <p>Resultados</p>
+            <p>Resultados estimados</p>
             <div className='underline'></div>
             <div className='result-input-fields'>
               <div className='input-field'>
