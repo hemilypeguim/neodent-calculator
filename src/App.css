@@ -170,7 +170,7 @@ label {
 }
 
 .result-fields::after {
-    content: '* taxa financeira: 1.2% a.m';
+    content: '* taxa financeira: 1.3% a.m';
     position: absolute;
     bottom: -24px;
     right: 8px;

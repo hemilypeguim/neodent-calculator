@@ -8,7 +8,7 @@ function App() {
 
   //VALORES FIXOS
   var t5 = 0.12;
-  var t6 = 0.012;
+  var t6 = 0.013;
   var t7 = 0.225;
 
   // CALCULOS DAS TAXAS
